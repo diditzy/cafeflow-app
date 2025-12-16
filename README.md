@@ -300,8 +300,8 @@ Project ini dibuat untuk keperluan akademik - Responsi 2 PPBO.
 
 **Radit Alfa Anugerah Bombing**  
 NIM: L0124116  
-Program Studi: [Your Program]  
-Universitas: [Your University]
+Program Studi: INFORMATICS  
+Universitas: SEBELAS MARET UNIVERSITY
 
 ---
 
