@@ -70,8 +70,14 @@ CafeFlow adalah aplikasi kasir modern untuk cafe yang menerapkan konsep Object-O
    ```
    - Buka SSMS
    - Login dengan SQL Server Authentication
-   - Jalankan file: setup_quick.sql
+   - Jalankan file: database_setup.sql (ALL-IN-ONE)
    ```
+   
+   **File SQL yang tersedia:**
+   - `database_setup.sql` - **File utama** (gabungan semua setup + sample data)
+   - `setup_quick.sql` - Setup database saja (opsional, jika tidak ingin sample data)
+   - `sample_data.sql` - Sample data saja (opsional)
+   - `fix_constraint.sql` - Fix constraint jika ada masalah (opsional)
 
 3. **Konfigurasi Connection**
    

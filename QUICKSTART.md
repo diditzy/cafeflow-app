@@ -1,49 +1,38 @@
-# 🚀 Quick Start Guide - CafeFlow
+# 🚀 Quick Start - CafeFlow
 
-## Langkah Cepat Menjalankan Aplikasi
+## Langkah Cepat
 
-### Option 1: Menggunakan Maven (Recommended)
-
-```bash
-# 1. Masuk ke folder project
-cd "c:\Programming Code!\Smst 3\PBO\Responsi2_PPBO_L0124116_RaditAlfaAnugerahBombing"
-
-# 2. Compile project
-mvn clean compile
-
-# 3. Jalankan aplikasi
-mvn exec:java -Dexec.mainClass="com.cafeflow.MainApp"
+### 1. Setup Database
+```
+Buka SSMS → Jalankan: database_setup.sql
 ```
 
-### Option 2: Menggunakan IDE
+### 2. Jalankan Aplikasi
 
-**IntelliJ IDEA:**
-1. File → Open → Pilih folder project
-2. Wait Maven import selesai
-3. Klik kanan `MainApp.java` → Run
+**Menggunakan Maven:**
+```bash
+cd "project-folder"
+mvn clean compile
+mvn exec:java
+```
 
-**Eclipse:**
-1. File → Import → Existing Maven Projects
-2. Browse ke folder project
-3. Right-click `MainApp.java` → Run As → Java Application
-
-**NetBeans:**
-1. File → Open Project
-2. Wait Maven sync
-3. Right-click `MainApp.java` → Run File
+**Menggunakan IDE:**
+- IntelliJ: Klik kanan MainApp.java → Run
+- Eclipse: Right-click MainApp.java → Run As → Java Application
+- NetBeans: Right-click MainApp.java → Run File
 
 ---
 
-## ✅ Checklist Sebelum Run
+## ✅ Requirements
 
-- [ ] Java JDK 17+ terinstall (`java -version`)
-- [ ] Maven terinstall (`mvn -version`)
-- [ ] Internet aktif (untuk download dependencies)
-- [ ] Port 8080 tidak terpakai (untuk database)
+- Java 17+
+- Maven 3.9+
+- SQL Server 2019+
+- SSMS
 
 ---
 
-## 🧪 Run Unit Tests
+## 🧪 Test
 
 ```bash
 mvn test

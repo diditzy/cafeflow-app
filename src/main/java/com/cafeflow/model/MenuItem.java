@@ -1,9 +1,6 @@
 package com.cafeflow.model;
 
-/**
- * Kelas abstrak untuk semua menu cafe.
- * Penerapan materi: Abstract Class, Encapsulation.
- */
+/** Base class untuk semua menu cafe (Abstract) */
 public abstract class MenuItem {
     protected String nama;
     protected double harga;
@@ -15,38 +12,18 @@ public abstract class MenuItem {
         this.kategori = kategori;
     }
 
-    // Getter methods (Encapsulation)
-    public String getNama() { 
-        return nama; 
-    }
+    public String getNama() { return nama; }
     
-    public double getHarga() { 
-        return harga; 
-    }
+    public double getHarga() { return harga; }
     
-    public String getKategori() { 
-        return kategori; 
-    }
+    public String getKategori() { return kategori; }
 
-    // Setter methods
-    public void setNama(String nama) { 
-        this.nama = nama; 
-    }
+    public void setNama(String nama) { this.nama = nama; }
     
-    public void setHarga(double harga) { 
-        this.harga = harga; 
-    }
+    public void setHarga(double harga) { this.harga = harga; }
 
-    /**
-     * Method abstract yang wajib di-override anak kelas
-     * @return Informasi cara penyajian menu
-     */
     public abstract String getInfoPenyajian();
     
-    /**
-     * Method untuk mendapatkan deskripsi lengkap menu
-     * @return Deskripsi menu
-     */
     public String getDeskripsi() {
         return String.format("%s - Rp %.0f (%s)", nama, harga, kategori);
     }

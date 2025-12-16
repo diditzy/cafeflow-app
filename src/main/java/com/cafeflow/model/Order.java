@@ -5,10 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Kelas untuk merepresentasikan satu transaksi pesanan.
- * Penerapan materi: Composition, Collections.
- */
+/** Representasi transaksi pesanan (Composition & Collections) */
 public class Order {
     private static int orderCounter = 1;
     
@@ -20,8 +17,8 @@ public class Order {
     private String customer;
     private double totalHarga;
     private double totalDiskon;
-    private String status; // PENDING, PROCESSING, COMPLETED, CANCELLED
-    private String paymentMethod; // CASH, QRIS, TRANSFER
+    private String status;
+    private String paymentMethod;
     
     public Order(String kasir, String customer) {
         this.orderId = orderCounter++;
@@ -31,7 +28,7 @@ public class Order {
         this.kasir = kasir;
         this.customer = customer;
         this.status = "PENDING";
-        this.paymentMethod = "CASH"; // default
+        this.paymentMethod = "CASH";
         this.totalHarga = 0;
         this.totalDiskon = 0;
     }

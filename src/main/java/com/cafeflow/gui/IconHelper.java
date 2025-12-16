@@ -4,17 +4,11 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Helper class untuk membuat icons menggunakan FlatLaf SVG Icons.
- * Menggunakan built-in icons dari FlatLaf untuk mengganti emoji.
- */
+/** Helper untuk membuat icon custom */
 public class IconHelper {
     
     private static final int DEFAULT_SIZE = 16;
     
-    /**
-     * Membuat icon dari FlatLaf dengan ukuran tertentu dan warna
-     */
     private static Icon createColoredIcon(String iconName, int size, Color color) {
         try {
             FlatSVGIcon icon = new FlatSVGIcon("com/formdev/flatlaf/extras/icons/" + iconName + ".svg");
@@ -24,14 +18,10 @@ public class IconHelper {
             }
             return icon;
         } catch (Exception e) {
-            // Fallback ke text icon
             return createTextIcon(getIconChar(iconName), size, color);
         }
     }
     
-    /**
-     * Fallback: Membuat icon dari text symbol
-     */
     private static Icon createTextIcon(String symbol, int size, Color color) {
         return new Icon() {
             @Override
@@ -61,9 +51,6 @@ public class IconHelper {
         };
     }
     
-    /**
-     * Mendapatkan karakter fallback untuk icon
-     */
     private static String getIconChar(String iconName) {
         return switch (iconName) {
             case "coffee" -> "☕";
@@ -74,13 +61,12 @@ public class IconHelper {
             case "money" -> "💵";
             case "smartphone" -> "📱";
             case "bank" -> "🏦";
-            case "check" -> "✓";
-            case "close" -> "✕";
+            case "check" -> "C";
+            case "close" -> "X";
             default -> "•";
         };
     }
     
-    // Icon presets dengan warna yang sesuai
     public static Icon getCoffeeIcon() {
         return createTextIcon("☕", 18, new Color(139, 69, 19));
     }

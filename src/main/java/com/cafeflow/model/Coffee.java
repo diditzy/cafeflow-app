@@ -1,13 +1,10 @@
 package com.cafeflow.model;
 
-/**
- * Representasi menu kopi/minuman.
- * Penerapan materi: Inheritance, Polymorphism, Interface Implementation.
- */
+/** Menu Kopi - Implementasi Inheritance & Discountable */
 public class Coffee extends MenuItem implements Discountable {
-    private String tipeGula; // Normal, Less, No Sugar
-    private String ukuran;   // Small, Medium, Large
-    private boolean isHot;   // Panas atau Dingin
+    private String tipeGula;
+    private String ukuran;
+    private boolean isHot;
 
     public Coffee(String nama, double harga, String tipeGula) {
         super(nama, harga, "Minuman");
@@ -23,7 +20,6 @@ public class Coffee extends MenuItem implements Discountable {
         this.isHot = isHot;
     }
 
-    // Getter & Setter
     public String getTipeGula() { return tipeGula; }
     public void setTipeGula(String tipeGula) { this.tipeGula = tipeGula; }
     
@@ -41,7 +37,6 @@ public class Coffee extends MenuItem implements Discountable {
 
     @Override
     public double hitungDiskon() {
-        // Logika: Jika harga > 20000, diskon 10%
         if (getHarga() > 20000) {
             return getHarga() * 0.1;
         }

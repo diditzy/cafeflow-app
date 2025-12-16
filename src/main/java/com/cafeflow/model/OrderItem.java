@@ -1,9 +1,6 @@
 package com.cafeflow.model;
 
-/**
- * Kelas untuk merepresentasikan item dalam order.
- * Penerapan materi: Composition, Encapsulation.
- */
+/** Item dalam order (Composition) */
 public class OrderItem {
     private MenuItem menu;
     private int quantity;
@@ -15,7 +12,6 @@ public class OrderItem {
         this.subtotal = menu.getHarga() * quantity;
     }
     
-    // Getters & Setters
     public MenuItem getMenu() { return menu; }
     public int getQuantity() { return quantity; }
     public double getSubtotal() { return subtotal; }

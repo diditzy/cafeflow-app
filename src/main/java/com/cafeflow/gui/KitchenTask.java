@@ -2,10 +2,7 @@ package com.cafeflow.gui;
 
 import javax.swing.*;
 
-/**
- * Simulasi proses memasak di dapur menggunakan Thread.
- * Penerapan materi: Multithreading, Thread Management.
- */
+/** Simulasi proses memasak di dapur (Multithreading) */
 public class KitchenTask extends Thread {
     private JProgressBar progressBar;
     private JLabel statusLabel;
@@ -28,7 +25,6 @@ public class KitchenTask extends Thread {
     @Override
     public void run() {
         try {
-            // Update UI menggunakan SwingUtilities untuk thread safety
             SwingUtilities.invokeLater(() -> {
                 statusLabel.setText("Status: Pesanan diterima dapur...");
                 progressBar.setValue(0);
@@ -75,7 +71,6 @@ public class KitchenTask extends Thread {
                 progressBar.setString("100% - Selesai");
             });
             
-            // Tampilkan notifikasi
             SwingUtilities.invokeLater(() -> {
                 JOptionPane.showMessageDialog(
                     null,
@@ -85,7 +80,6 @@ public class KitchenTask extends Thread {
                     JOptionPane.INFORMATION_MESSAGE
                 );
                 
-                // Jalankan callback jika ada
                 if (onComplete != null) {
                     onComplete.run();
                 }

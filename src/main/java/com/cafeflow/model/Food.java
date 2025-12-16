@@ -1,13 +1,10 @@
 package com.cafeflow.model;
 
-/**
- * Representasi menu makanan.
- * Penerapan materi: Inheritance, Polymorphism, Method Overriding.
- */
+/** Menu Makanan - Implementasi Inheritance */
 public class Food extends MenuItem {
     private boolean isPedas;
-    private String porsi; // Regular, Large
-    private int waktuMasak; // dalam menit
+    private String porsi;
+    private int waktuMasak;
 
     public Food(String nama, double harga, boolean isPedas) {
         super(nama, harga, "Makanan");
@@ -23,7 +20,6 @@ public class Food extends MenuItem {
         this.waktuMasak = waktuMasak;
     }
 
-    // Getter & Setter
     public boolean isPedas() { return isPedas; }
     public void setPedas(boolean pedas) { isPedas = pedas; }
     

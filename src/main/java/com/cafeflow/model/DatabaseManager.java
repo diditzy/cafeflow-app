@@ -34,7 +34,7 @@ public class DatabaseManager {
         Properties props = new Properties();
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("db.properties")) {
             if (input == null) {
-                System.out.println("⚠️ File db.properties tidak ditemukan, menggunakan default SQL Server...");
+                System.out.println("File db.properties tidak ditemukan, menggunakan default SQL Server...");
                 useDefaultConfiguration();
                 return;
             }
@@ -60,18 +60,18 @@ public class DatabaseManager {
             
             if (integratedSecurity.equalsIgnoreCase("true")) {
                 urlBuilder.append(";integratedSecurity=true");
-                System.out.println("✓ Using Windows Authentication (Fast Mode)");
+                System.out.println(" Using Windows Authentication (Fast Mode)");
             } else if (!username.isEmpty()) {
                 urlBuilder.append(";user=").append(username)
                           .append(";password=").append(password);
-                System.out.println("✓ Using SQL Server Authentication (Fast Mode)");
+                System.out.println(" Using SQL Server Authentication (Fast Mode)");
             }
             
             connectionUrl = urlBuilder.toString();
-            System.out.println("✓ Database: " + database + " on " + server);
+            System.out.println(" Database: " + database + " on " + server);
             
         } catch (IOException e) {
-            System.err.println("⚠️ Error loading configuration: " + e.getMessage());
+            System.err.println("Error loading configuration: " + e.getMessage());
             useDefaultConfiguration();
         }
     }
@@ -88,7 +88,7 @@ public class DatabaseManager {
                        "trustServerCertificate=true;" +
                        "loginTimeout=3;" +             // 3 detik max untuk login
                        "socketTimeout=5000;";          // 5 detik max untuk query
-        System.out.println("✓ Using default: localhost\\CafeFlowDB (Windows Auth - Fast Mode)");
+        System.out.println(" Using default: localhost\\CafeFlowDB (Windows Auth - Fast Mode)");
     }
     
     private Connection getConnection() throws SQLException {
@@ -139,7 +139,7 @@ public class DatabaseManager {
             """;
             stmt.execute(createOrderItemsTable);
             
-            System.out.println("✓ Database tables ready!");
+            System.out.println(" Database tables ready!");
             
         } catch (SQLException e) {
             System.err.println("❌ Database Error: " + e.getMessage());
