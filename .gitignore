@@ -70,5 +70,6 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# Database (optional - uncomment if you want to ignore DB file)
-# cafeflow.db
+# Database Configuration
+# Ignore local overrides to prevent credential conflicts
+db-local.properties

@@ -1,0 +1,22 @@
+# =====================================================
+# Local Override Configuration (EXAMPLE)
+# =====================================================
+# Copy file ini jadi "db-local.properties" dan edit
+# File db-local.properties TIDAK akan di-commit ke Git
+#
+# Priority: db-local.properties > db-windows/linux.properties > db.properties
+# =====================================================
+
+# Server Configuration
+db.server=localhost
+db.port=1433
+db.database=CafeFlowDB
+
+# SQL Server Authentication
+db.username=your_username
+db.password=your_password
+
+# Connection Settings
+db.integratedSecurity=false
+db.encrypt=false
+db.trustServerCertificate=true

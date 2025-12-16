@@ -28,13 +28,52 @@ public class DatabaseManager {
     }
     
     /**
-     * Load konfigurasi database dari file properties
+     * Load konfigurasi database dari file properties dengan prioritas:
+     * 1. db-local.properties (untuk override lokal, tidak di-commit ke Git)
+     * 2. db-windows.properties / db-linux.properties (sesuai OS)
+     * 3. db.properties (fallback)
      */
     private void loadConfiguration() {
         Properties props = new Properties();
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("db.properties")) {
+        InputStream input = null;
+        
+        try {
+            // Prioritas 1: Cek db-local.properties (untuk override lokal)
+            input = getClass().getClassLoader().getResourceAsStream("db-local.properties");
+            if (input != null) {
+                System.out.println("✓ Loading config: db-local.properties (Local Override)");
+            }
+            
+            // Prioritas 2: Cek file sesuai OS
             if (input == null) {
-                System.out.println("File db.properties tidak ditemukan, menggunakan default SQL Server...");
+                String osName = System.getProperty("os.name").toLowerCase();
+                String osConfigFile = null;
+                
+                if (osName.contains("win")) {
+                    osConfigFile = "db-windows.properties";
+                } else if (osName.contains("nix") || osName.contains("nux") || osName.contains("mac")) {
+                    osConfigFile = "db-linux.properties";
+                }
+                
+                if (osConfigFile != null) {
+                    input = getClass().getClassLoader().getResourceAsStream(osConfigFile);
+                    if (input != null) {
+                        System.out.println("✓ Loading config: " + osConfigFile + " (OS: " + osName + ")");
+                    }
+                }
+            }
+            
+            // Prioritas 3: Fallback ke db.properties
+            if (input == null) {
+                input = getClass().getClassLoader().getResourceAsStream("db.properties");
+                if (input != null) {
+                    System.out.println("✓ Loading config: db.properties (Default)");
+                }
+            }
+            
+            // Jika tidak ada file config yang ditemukan
+            if (input == null) {
+                System.out.println("⚠ No config file found, using default configuration...");
                 useDefaultConfiguration();
                 return;
             }
@@ -46,8 +85,8 @@ public class DatabaseManager {
             String database = props.getProperty("db.database", "CafeFlowDB");
             String username = props.getProperty("db.username", "");
             String password = props.getProperty("db.password", "");
-            String integratedSecurity = props.getProperty("db.integratedSecurity", "true");
-            String encrypt = props.getProperty("db.encrypt", "false"); // false untuk speed
+            String integratedSecurity = props.getProperty("db.integratedSecurity", "false");
+            String encrypt = props.getProperty("db.encrypt", "false");
             String trustServerCertificate = props.getProperty("db.trustServerCertificate", "true");
             
             StringBuilder urlBuilder = new StringBuilder();
@@ -55,24 +94,32 @@ public class DatabaseManager {
                       .append(";databaseName=").append(database)
                       .append(";encrypt=").append(encrypt)
                       .append(";trustServerCertificate=").append(trustServerCertificate)
-                      .append(";loginTimeout=3")           // 3 detik timeout untuk login
-                      .append(";socketTimeout=5000");      // 5 detik timeout untuk query
+                      .append(";loginTimeout=3")
+                      .append(";socketTimeout=5000");
             
             if (integratedSecurity.equalsIgnoreCase("true")) {
                 urlBuilder.append(";integratedSecurity=true");
-                System.out.println(" Using Windows Authentication (Fast Mode)");
+                System.out.println("  Auth: Windows Authentication");
             } else if (!username.isEmpty()) {
                 urlBuilder.append(";user=").append(username)
                           .append(";password=").append(password);
-                System.out.println(" Using SQL Server Authentication (Fast Mode)");
+                System.out.println("  Auth: SQL Server Authentication (User: " + username + ")");
             }
             
             connectionUrl = urlBuilder.toString();
-            System.out.println(" Database: " + database + " on " + server);
+            System.out.println("  Database: " + database + " @ " + server + ":" + port);
             
         } catch (IOException e) {
-            System.err.println("Error loading configuration: " + e.getMessage());
+            System.err.println("✗ Error loading configuration: " + e.getMessage());
             useDefaultConfiguration();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    // Ignore
+                }
+            }
         }
     }
     
